@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% block body %}
+<h1>Manage Your Todo</h1>
+<p class="intruction">Left-Click Your Todo To Mark As Done</p>
+{% if todos|length > 0 %}
+<p class="counter">{{todoNotDone|length}}</p>
+{% endif %}
+<form action="/" method="POST">
+  <input type="text" name="content" placeholder="Add a new task..." required maxlength="200">
+  <button type="submit" class="addButton"><i class="fa-solid fa-plus"></i></button>
+</form>
+<div class="mainContainer">
+    {% for todo in todos %}  
+    <ul>
+      <li class="todoContainer">
+        <span class="date">{{ todo.date.strftime('%Y-%m-%d') }}</span>
+        <a class="todoText {{todo.mark}}" href="/mark/{{todo.id}}">{{ todo.content }}</a>
+        <div class="buttonContainer">
+          <a href="/delete/{{todo.id}}"><i class="fa-solid fa-trash"></i></a>
+          <a href="/update/{{todo.id}}"><i class="fa-solid fa-pen"></i></a>
+        </div>
+      </li>
+      <!-- Repeat more li.todoContainer if needed -->
+    </ul>
+    {% endfor %}  
+</div>
+{% if todos|length == 0 %}
+<p class="noTodos">Start Adding Your Todos!</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{% block body %}
+<h1>Edit Your Todo</h1>
+<p class="intruction">After Editing Date Will Stay The Same</p>
+<form action="/update/{{todo.id}}" method="POST">
+  <input type="text" name="content" value="{{todo.content}}" required maxlength="200">
+  <button type="submit" class="addButton"><i class="fa-solid fa-arrow-up"></i></button>
+</form>
+{% endblock %}
